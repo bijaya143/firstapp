@@ -1,6 +1,7 @@
 import 'package:firstapp/model/area/circle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 class CircleAreaScreen extends StatefulWidget {
   const CircleAreaScreen({super.key});
@@ -44,7 +45,16 @@ class _CircleAreaScreenState extends State<CircleAreaScreen> {
                   },
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular((10.0))),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
                       labelText: 'Enter Radius'
                   ),
                 ),

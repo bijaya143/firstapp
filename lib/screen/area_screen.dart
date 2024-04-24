@@ -33,11 +33,27 @@ class _AreaScreenState extends State<AreaScreen> {
                         context,
                         MaterialPageRoute(builder: (context) => const CircleAreaScreen()));
                   },
-                  child: const Text(
-                    'Area of circle',
-                    style: TextStyle(
-                      fontSize: 25,
-                    ),
+                  child: RichText(
+                    text: const TextSpan(
+                     text: 'Area ',
+                     style: TextStyle(
+                       color: Colors.green,
+                       fontSize: 30,
+                     ),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Of',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueGrey,
+                              backgroundColor: Colors.yellow
+                            )
+                          ),
+                          TextSpan(
+                            text: ' Circle',
+                          )
+                        ]
+                    )
                   ),
                 ),
               ),
