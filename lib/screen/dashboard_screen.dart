@@ -4,8 +4,10 @@ import 'package:firstapp/screen/column_screen.dart';
 import 'package:firstapp/screen/container_screen.dart';
 import 'package:firstapp/screen/flexible_expanded_screen.dart';
 import 'package:firstapp/screen/layout_screen.dart';
+import 'package:firstapp/screen/list_tile_screen.dart';
 import 'package:firstapp/screen/row_and_column_screen.dart';
 import 'package:firstapp/screen/simple_interest_screen.dart';
+import 'package:firstapp/screen/student_mgmt_screen.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -164,6 +166,40 @@ class DashboardScreen extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 25,
                         color: Colors.brown
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ListTileScreen()));
+                  },
+                  child: const Text(
+                    'List Tile',
+                    style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.purpleAccent
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const StudentMgmtScreen()));
+                  },
+                  child: const Text(
+                    'Student Management',
+                    style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.cyan
                     ),
                   ),
                 ),
