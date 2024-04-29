@@ -1,3 +1,4 @@
+import 'package:firstapp/model/student/student_model.dart';
 import 'package:flutter/material.dart';
 
 class StudentMgmtScreen extends StatefulWidget {
@@ -15,84 +16,134 @@ class _StudentMgmtScreenState extends State<StudentMgmtScreen> {
   String? firstName;
   String? lastName;
   String? address;
-
-  Object? result = {};
+  String? image;
+  Student? student;
+  Map<String, dynamic>? result;
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
-    // return Scaffold(
-    //     backgroundColor: Colors.grey,
-    //     appBar: AppBar(
-    //       title: const Text('Area of Circle'),
-    //       backgroundColor: Colors.blueGrey,
-    //       centerTitle: true,
-    //       elevation: 0,
-    //     ),
-    //     body: Padding(
-    //       padding: const EdgeInsets.all(9),
-    //       child: Form(
-    //         key: _formKey,
-    //         child: Column(
-    //           children: [
-    //             TextFormField(
-    //               validator: (value) {
-    //                 if(value == null || value.isEmpty){
-    //                   return 'Please enter first name.';
-    //                 }
-    //                 return null;
-    //               },
-    //               onChanged: (value) {
-    //                 firstName = value;
-    //               },
-    //               keyboardType: TextInputType.number,
-    //               decoration: const InputDecoration(
-    //                   border: OutlineInputBorder(
-    //                     borderRadius: BorderRadius.all(Radius.circular((10.0))),
-    //                   ),
-    //                   enabledBorder: OutlineInputBorder(
-    //                     borderSide: BorderSide(color: Colors.red),
-    //
-    //                   ),
-    //                   focusedBorder: OutlineInputBorder(
-    //                     borderSide: BorderSide(color: Colors.green),
-    //                   ),
-    //                   labelText: 'Enter Radius'
-    //               ),
-    //             ),
-    //             const SizedBox(height: 8),
-    //             const SizedBox(height: 8),
-    //             // Button
-    //             SizedBox(
-    //               width: double.infinity,
-    //               child: ElevatedButton(
-    //                 onPressed: (){
-    //                   if (_formKey.currentState!.validate()){}
-    //                   setState(() {
-    //                     circle = Circle(radius: radius!);
-    //                     result = circle!.calculateArea();
-    //                   });
-    //                 },
-    //                 child: const Text(
-    //                   'Calculate',
-    //                   style: TextStyle(
-    //                     fontSize: 25,
-    //                   ),
-    //                 ),
-    //               ),
-    //             ),
-    //             const SizedBox(height: 8),
-    //             // Display informatuion
-    //             Text(
-    //               'Area of a circle is : $result',
-    //               style: const TextStyle(
-    //                 fontSize: 30,
-    //               ),
-    //             ),
-    //           ],
-    //         ),
-    //       ),
-    //     )
-    // );
+    return Scaffold(
+        backgroundColor: Colors.grey,
+        appBar: AppBar(
+          title: const Text('Student Management'),
+          backgroundColor: Colors.indigo,
+          centerTitle: true,
+          elevation: 0,
+        ),
+        body:
+        Column(
+          children: [
+            Padding(padding: const EdgeInsets.all(20),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      validator: (value) {
+                        if(value == null || value.isEmpty){
+                          return 'Please enter first name.';
+                        }
+                        return null;
+                      },
+                      onChanged: (value) {
+                        firstName = value;
+                      },
+                      keyboardType: TextInputType.text,
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular((10.0))),
+                          ),
+                          labelText: 'Enter First Name'
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    TextFormField(
+                      validator: (value) {
+                        if(value == null || value.isEmpty){
+                          return 'Please enter last name.';
+                        }
+                        return null;
+                      },
+                      onChanged: (value) {
+                        lastName = value;
+                      },
+                      keyboardType: TextInputType.text,
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular((10.0))),
+                          ),
+                          labelText: 'Enter Last Name'
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    TextFormField(
+                      validator: (value) {
+                        if(value == null || value.isEmpty){
+                          return 'Please enter address.';
+                        }
+                        return null;
+                      },
+                      onChanged: (value) {
+                        address = value;
+                      },
+                      keyboardType: TextInputType.streetAddress,
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular((10.0))),
+                          ),
+                          labelText: 'Enter Address'
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    // Button
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: (){
+                          if (_formKey.currentState!.validate()){}
+                          setState(() {
+                            student = Student(firstName: firstName!, lastName: lastName!, address: address!);
+                            result = student!.getStudent();
+                          });
+                          image = 'assets/images/image_2.jpg';
+                        },
+                        child: const Text(
+                          'Save',
+                          style: TextStyle(
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(child:
+            SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                        height: 200,
+                        child: image != null ? CircleAvatar(backgroundImage:
+                          AssetImage('$image'), maxRadius: 80, minRadius: 80,) : null
+                    ),
+                    if(result != null) ...{
+                      for (var entry in result!.entries) ...{
+                        ListTile(
+                          title: Text('${entry.key}: ${entry.value}', style: const TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold
+                            ),),
+                        ),
+                      }
+                    }
+                  ],
+                ),
+              )
+            ),
+          ],
+        ),
+    );
   }
 }

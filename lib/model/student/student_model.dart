@@ -9,11 +9,11 @@ class Student {
     required this.address
   });
 
-  add(){
+  Map<String, dynamic> getStudent() {
     return {
-      firstName,
-      lastName,
-      address
+      'First Name': firstName,
+      'Last Name': lastName,
+      'Adress': address,
     };
   }
 }
